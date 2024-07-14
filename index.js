@@ -14,9 +14,7 @@ app.get("/", (req, res) => {
   res.send("Hello from Node API Server");
 });
 
-connect(
-  "mongodb+srv://nikmore:X0Va0frRsCpiggvO@backenddb.xmb7yyf.mongodb.net/?retryWrites=true&w=majority&appName=BackendDB"
-)
+connect()
   .then(() => {
     console.log("Connected to database!");
     app.listen(3000, () => {
