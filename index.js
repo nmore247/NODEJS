@@ -1,11 +1,11 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const app = express();
-const productRoute = require("./routes/product.route.js")
+import express, { json, urlencoded } from "express";
+import { connect } from "mongoose";
+import productRoute from "./routes/product.route.js";
 
 // middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+const app = express();
+app.use(json());
+app.use(urlencoded({ extended: false }));
 
 //routes
 app.use("/api/products", productRoute);
@@ -14,10 +14,9 @@ app.get("/", (req, res) => {
   res.send("Hello from Node API Server");
 });
 
-mongoose
-  .connect(
-    "mongodb+srv://nikmore:X0Va0frRsCpiggvO@backenddb.xmb7yyf.mongodb.net/?retryWrites=true&w=majority&appName=BackendDB"
-  )
+connect(
+  "mongodb+srv://nikmore:X0Va0frRsCpiggvO@backenddb.xmb7yyf.mongodb.net/?retryWrites=true&w=majority&appName=BackendDB"
+)
   .then(() => {
     console.log("Connected to database!");
     app.listen(3000, () => {
